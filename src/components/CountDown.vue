@@ -1,13 +1,7 @@
 <template>
   <div>
       <h1>{{ msg }}</h1>
-      <div><p class="watch">
-          {{ hours }} : 
-          {{ minutes | zeroPad }} : 
-          {{ seconds | zeroPad}} : 
-          {{ milliSeconds | zeroPad(3)}}
-          </p>
-      </div>
+      <TimerDisplay class="large-display" :time="time" :isLarge="true" />
       <div>
           <span>
             <label>Hours: </label>
@@ -34,10 +28,15 @@
   </div>
 </template>
 <script>
+import TimerDisplay from '@/components/TimerDisplay.vue'
+
 export default {
   name: 'CountDown',
   props: {
     msg: String
+  },
+  components: {
+      TimerDisplay
   },
   data() {
       return {
@@ -85,18 +84,6 @@ export default {
       }
   },
   computed: {
-      hours() {
-          return Math.floor(this.time / 1000 / 60 / 60);
-      },
-      minutes() {
-          return Math.floor(this.time / 1000 / 60) % 60;
-      },
-      seconds() {
-          return Math.floor(this.time / 1000) % 60;
-      },
-      milliSeconds() {
-          return Math.floor(this.time % 1000);
-      },
       canStart() {
           return (this.time > 0);
       }

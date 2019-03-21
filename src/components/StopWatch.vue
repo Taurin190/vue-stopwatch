@@ -1,13 +1,7 @@
 <template>
   <div>
       <h1>{{ msg }}</h1>
-      <div><p class="watch">
-          {{ hours }} : 
-          {{ minutes | zeroPad }} : 
-          {{ seconds | zeroPad}} : 
-          {{ milliSeconds | zeroPad(3)}}
-          </p>
-      </div>
+      <TimerDisplay class="large-display" :time="diffTime" :isLarge="true" />
       <div>
           <button @click="startTimer" :disabled="isRunning">START</button>
           <button @click="lapTimer" >LAP</button>
@@ -17,22 +11,24 @@
       <div>
           <ul>
               <li v-for="(lap, index) in lapTimes" :key="lap.id">
-                  <p>LAP {{ index + 1}}: 
-                      {{ lap.hours }} : 
-                      {{ lap.minutes | zeroPad }} : 
-                      {{ lap.seconds | zeroPad}} : 
-                      {{ lap.milliSeconds | zeroPad(3)}}
-                      </p>
+                  <p>LAP{{ index + 1}}  
+                      <TimerDisplay :time="lap.time" :isLarge="false" />
+                  </p>
               </li>
           </ul>
       </div>
   </div>
 </template>
 <script>
+import TimerDisplay from '@/components/TimerDisplay.vue'
+
 export default {
   name: 'StopWatch',
   props: {
     msg: String
+  },
+  components: {
+      TimerDisplay
   },
   data () {
       return {
@@ -60,10 +56,7 @@ export default {
       lapTimer: function() {
           console.log("LAP");
           this.lapTimes.push({
-              hours: this.hours,
-              minutes: this.minutes,
-              seconds: this.seconds,
-              milliSeconds: this.milliSeconds
+              time: this.diffTime
               })
       },
       stopTimer: function() {
@@ -77,38 +70,9 @@ export default {
           this.diffTime = 0
           this.stoppedTime = 0
           this.lapTimes = []
-      }
-  },
-  computed: {
-      hours() {
-          return Math.floor(this.diffTime / 1000 / 60 / 60);
       },
-      minutes() {
-          return Math.floor(this.diffTime / 1000 / 60) % 60;
-      },
-      seconds() {
-          return Math.floor(this.diffTime / 1000) % 60;
-      },
-      milliSeconds() {
-          return Math.floor(this.diffTime % 1000);
-      },
-      classStart() {
-          
-      },
-      classStop() {
-          return {
-
-          }
-      },
-      classReset() {
-          
-      }
-  },
-  filters: {
-      zeroPad: function(value, num) {
-          var num = typeof num !== 'undefined' ? num : 2;
-          value = value.toString()
-          return value.padStart(num, "0");
+      updateTimeStr: function(timeText) {
+          time_str = timeText;
       }
   }
 }
@@ -117,8 +81,5 @@ export default {
 ul {
     list-style: none;
     padding-inline-start: 0;
-}
-.watch {
-    font-size: 60px;
 }
 </style>
