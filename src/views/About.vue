@@ -1,5 +1,15 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <CountDown msg="Welcome to Count Down App" />
   </div>
 </template>
+<script>
+import CountDown from '@/components/CountDown.vue'
+
+export default {
+  name: 'home',
+  components: {
+    CountDown
+  }
+}
+</script>
