@@ -1,7 +1,7 @@
 <template>
   <div>
       <h1>{{ msg }}</h1>
-      <div><p>
+      <div><p class="watch">
           {{ hours }} : 
           {{ minutes | zeroPad }} : 
           {{ seconds | zeroPad}} : 
@@ -9,10 +9,10 @@
           </p>
       </div>
       <div>
-          <button @click="startTimer">START</button>
-          <button @click="lapTimer">LAP</button>
-          <button @click="stopTimer">STOP</button>
-          <button @click="resetTimer">RESET</button>
+          <button @click="startTimer" :disabled="isRunning">START</button>
+          <button @click="lapTimer" >LAP</button>
+          <button @click="stopTimer" :disabled="!isRunning">STOP</button>
+          <button @click="resetTimer" :disabled="isRunning">RESET</button>
       </div>
       <div>
           <ul>
@@ -91,6 +91,17 @@ export default {
       },
       milliSeconds() {
           return Math.floor(this.diffTime % 1000);
+      },
+      classStart() {
+          
+      },
+      classStop() {
+          return {
+
+          }
+      },
+      classReset() {
+          
       }
   },
   filters: {
@@ -106,5 +117,8 @@ export default {
 ul {
     list-style: none;
     padding-inline-start: 0;
+}
+.watch {
+    font-size: 60px;
 }
 </style>
