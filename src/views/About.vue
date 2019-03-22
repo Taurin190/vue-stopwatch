@@ -7,7 +7,7 @@
 import CountDown from '@/components/CountDown.vue'
 
 export default {
-  name: 'home',
+  name: 'about',
   components: {
     CountDown
   }
