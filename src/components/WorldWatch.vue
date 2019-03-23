@@ -28,14 +28,14 @@ export default {
   data () {
       return {
           time: 0,
-          selected: 0,
-          timeDifference: 0,
+          selected: 9,
+          timeDifference: 9,
           timezones: {
+              "日本": 9,
               "イギリス": 0,
               "フランス": 1,
               "インド": 3.5,
               "シンガポール": 8,
-              "日本": 9,
               "シカゴ": -6
           }
     }

@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Stop Watch</router-link> |
-      <router-link to="/about">Count Down Timer</router-link> |
+      <router-link to="/countdown">Count Down Timer</router-link> |
       <router-link to="/watch">World Watch</router-link>
     </div>
     <router-view/>

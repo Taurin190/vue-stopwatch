@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import About from './views/About.vue'
+import CountDown from './views/CountDown.vue'
 import Watch from './views/Watch.vue'
 
 Vue.use(Router)
@@ -15,9 +15,9 @@ export default new Router({
             component: Home
         },
         {
-            path: '/about',
-            name: 'about',
-            component: About
+            path: '/countdown',
+            name: 'countdown',
+            component: CountDown
         },
         {
             path: '/watch',
