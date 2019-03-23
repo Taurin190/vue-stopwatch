@@ -1,17 +1,24 @@
 <template>
 <div>
     <p :class="{watch : isLarge}">
-        {{ hours }} : 
+        {{ hours}} : 
         {{ minutes | zeroPad }} : 
-        {{ seconds | zeroPad}} : 
-        {{ milliSeconds | zeroPad(3)}}
+        {{ seconds | zeroPad}}
+        <span v-if="showMilliSeconds"> : {{ milliSeconds | zeroPad(3)}}</span>
     </p>
 </div>
 </template>
 <script>
 export default {
     name: 'TimerDisplay',
-    props: ["time", "isLarge"],
+    props: {
+        time: Number, 
+        isLarge: Boolean, 
+        showMilliSeconds: {
+            type: Boolean,
+            default: true
+        }
+    },
     computed: {
       hours() {
           return Math.floor(this.time / 1000 / 60 / 60);
